@@ -15,7 +15,7 @@ export const Navbar = () => {
         >
             <MobileSidebar />
             <div className="flex items-center gap-x-4">
-                <div className="hidden md:flex">
+                <div className="hidden md:flex ml-2">
                     <Logo />
                 </div>
                 <FormPopover align="start" side="bottom" sideOffset={18}>
@@ -41,14 +41,16 @@ export const Navbar = () => {
                     }}
                 />
             </div>
-            <UserButton appearance={{
-                elements: {
-                    avatarBox: {
-                        height: "30",
-                        width: "30",
+            <UserButton
+                appearance={{
+                    elements: {
+                        avatarBox: {
+                            height: "30",
+                            width: "30",
+                        }
                     }
-                }
-            }} />
+                }} />
+            <div className="ml-2" />
         </nav>
     );
 }

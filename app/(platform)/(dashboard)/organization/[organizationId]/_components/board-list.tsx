@@ -35,7 +35,7 @@ export const BoardList = async () => {
                         key={board.id}
                         href={`/board/${board.id}`}
                         style={{
-                            backgroundImage: `url(${board.imageFullUrl})`,
+                            backgroundImage: `url(${board.imageThumbUrl})`,
                         }}
                         className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 rounded-sm h-full w-full p-2 overflow-hidden"
                     >
