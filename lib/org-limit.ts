@@ -60,11 +60,7 @@ export const hasAvailableCount = async () => {
     where: { orgId },
   });
 
-  if (!orgLimit || orgLimit.count < MAX_FREE_BOARDS) {
-    return true;
-  } else {
-    return false;
-  }
+  return !orgLimit || orgLimit.count < MAX_FREE_BOARDS;
 };
 
 export const getAvailableCount = async () => {

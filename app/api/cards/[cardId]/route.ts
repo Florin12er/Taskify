@@ -15,14 +15,14 @@ export async function GET(
     const card = await db.card.findUnique({
       where: {
         id: params.cardId,
-        list: {
-          board: {
+        List: {
+          Board: {
             orgId,
           },
         },
       },
       include: {
-        list: {
+        List: {
           select: {
             title: true,
           },
