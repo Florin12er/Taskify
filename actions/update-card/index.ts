@@ -28,8 +28,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     card = await db.card.update({
       where: {
         id,
-        list: {
-          board: {
+        List: {
+          Board: {
             orgId,
           },
         },

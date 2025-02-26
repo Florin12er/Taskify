@@ -27,7 +27,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     const list = await db.list.findUnique({
       where: {
         id: listId,
-        board: {
+        Board: {
           orgId,
         },
       },
