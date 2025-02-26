@@ -27,16 +27,18 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     const cardToCopy = await db.card.findUnique({
       where: {
         id,
-        list: {
-          board: {
-            orgId,
+      },
+      include: {
+        List: {
+          include: {
+            Board: true,
           },
         },
       },
     });
 
-    if (!cardToCopy) {
-      return { error: "Card not found" };
+    if (!cardToCopy || cardToCopy.List.Board.orgId !== orgId) {
+      return { error: "Card not found or unauthorized" };
     }
 
     const lastCard = await db.card.findFirst({
