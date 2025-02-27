@@ -1,9 +1,8 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(req: Request, { params }: { params: { cardId: string } }) {
   try {
     const { userId, orgId } = auth();
 
@@ -11,17 +10,13 @@ export async function GET(request: NextRequest) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const { pathname } = new URL(request.url);
-    const cardId = pathname.split("/")[4];
+    if (!params.cardId) {
+      return new NextResponse("Card ID is required", { status: 400 });
+    }
 
     const card = await db.card.findUnique({
       where: {
-        id: cardId,
-        List: {
-          Board: {
-            orgId,
-          },
-        },
+        id: params.cardId,
       },
       include: {
         List: {
@@ -38,6 +33,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(card);
   } catch (error) {
+    console.error("Error fetching card:", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
